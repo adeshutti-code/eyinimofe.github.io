@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eyinimofe | Brand Storytelling &amp; Copywriting</title>
+<meta name="description" content="Eyinimofe is a writer specializing in brand storytelling, copywriting, and social media content.">
+<meta name="theme-color" content="#FBF8F1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+  /* ------------------------------------------------------------
+     DESIGN TOKENS
+     Change colours and fonts here and the whole site follows.
+  ------------------------------------------------------------ */
+  :root {
+    --ivory: #FBF8F1;
+    --paper: #F3EEE0;
+    --brown: #34261D;
+    --brown-soft: #65554A;
+    --olive: #5A6232;
+    --olive-deep: #3F4724;
+    --olive-tint: #E6E8D6;
+    --line: #DCD4C1;
+
+    --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    --sans: "Jost", "Segoe UI", Roboto, system-ui, sans-serif;
+
+    --wrap: 1080px;
+    --gutter: clamp(20px, 5vw, 40px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--brown);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  a { color: inherit; }
+  img, svg { display: block; max-width: 100%; }
+  :focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  .skip {
+    position: absolute; left: -999px; top: 8px; background: var(--brown); color: var(--ivory);
+    padding: 8px 14px; z-index: 100;
+  }
+  .skip:focus { left: 8px; }
+
+  /* ------------------------------------------------------------
+     HEADER
+  ------------------------------------------------------------ */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--ivory);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 66px;
+  }
+  .brand {
+    font-family: var(--serif); font-size: 1.35rem; text-decoration: none; letter-spacing: 0;
+  }
+  .nav { display: flex; gap: 32px; }
+  .nav a {
+    text-decoration: none; font-size: 0.95rem; color: var(--brown-soft);
+    background: linear-gradient(var(--olive), var(--olive)) left bottom / 0 1px no-repeat;
+    padding-bottom: 3px; transition: color .2s, background-size .25s;
+  }
+  .nav a:hover { color: var(--brown); background-size: 100% 1px; }
+  .menu-btn {
+    display: none; background: none; border: 1px solid var(--line); color: var(--brown);
+    font: inherit; font-size: 0.95rem; padding: 8px 16px; border-radius: 2px; cursor: pointer;
+  }
+
+  /* ------------------------------------------------------------
+     HERO
+  ------------------------------------------------------------ */
+  .hero { padding: clamp(64px, 14vh, 140px) 0 clamp(72px, 12vh, 130px); }
+  .hero h1 {
+    font-size: clamp(2.6rem, 7.4vw, 5.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    max-width: 12.5em;
+  }
+  .hero h1 span { display: block; }
+  .hero-sub {
+    margin-top: clamp(32px, 5vw, 52px);
+    max-width: 34rem;
+    padding-left: 22px;
+    border-left: 2px solid var(--olive);
+    color: var(--brown-soft);
+    font-size: 1.15rem;
+  }
+  .actions { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-family: var(--sans); font-weight: 500;
+    font-size: 1rem; padding: 14px 28px; border-radius: 2px; border: 1px solid var(--olive-deep);
+    transition: background .2s, color .2s, border-color .2s; cursor: pointer;
+  }
+  .btn-primary { background: var(--olive-deep); color: var(--ivory); }
+  .btn-primary:hover { background: var(--brown); border-color: var(--brown); }
+  .btn-ghost { background: transparent; color: var(--brown); border-color: var(--brown); }
+  .btn-ghost:hover { background: var(--brown); color: var(--ivory); }
+
+  /* The one choreographed moment: the headline sets line by line on load */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 span { opacity: 0; transform: translateY(18px); animation: set .9s cubic-bezier(.2,.7,.2,1) forwards; }
+    .hero h1 span:nth-child(2) { animation-delay: .18s; }
+    .hero h1 span:nth-child(3) { animation-delay: .36s; }
+    .hero-sub, .actions { opacity: 0; animation: set .9s .7s ease forwards; }
+    .actions { animation-delay: .85s; }
+    @keyframes set { to { opacity: 1; transform: none; } }
+  }
+
+  /* ------------------------------------------------------------
+     SHARED SECTION LAYOUT
+  ------------------------------------------------------------ */
+  section { scroll-margin-top: 66px; }
+  .block { border-top: 1px solid var(--line); padding: clamp(64px, 10vw, 112px) 0; }
+  .split { display: grid; grid-template-columns: 1fr 2fr; gap: clamp(28px, 6vw, 80px); }
+  .block h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.15; }
+  .lede { font-family: var(--serif); font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.4; }
+  .muted { color: var(--brown-soft); }
+
+  /* ------------------------------------------------------------
+     ABOUT
+  ------------------------------------------------------------ */
+  .about-body { display: grid; gap: 28px; }
+  .about-body .muted { max-width: 38rem; }
+  .values { display: grid; gap: 14px; padding: 0; margin: 4px 0 0; list-style: none; max-width: 38rem; }
+  .values li { padding-left: 22px; position: relative; }
+  .values li::before {
+    content: ""; position: absolute; left: 0; top: .78em; width: 10px; height: 1px; background: var(--olive);
+  }
+  .values strong { font-weight: 600; }
+  .note {
+    border: 1px dashed var(--olive); background: var(--olive-tint);
+    padding: 22px 24px; max-width: 38rem; font-size: 1rem;
+  }
+  .note b { font-weight: 600; color: var(--olive-deep); }
+
+  /* ------------------------------------------------------------
+     SERVICES
+  ------------------------------------------------------------ */
+  .service { padding: 34px 0; border-top: 1px solid var(--line); }
+  .service:first-child { border-top: 0; padding-top: 0; }
+  .service:last-child { padding-bottom: 0; }
+  .service h3 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: 20px; }
+  .service-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .service h4 { font-family: var(--sans); font-weight: 600; font-size: 0.95rem; color: var(--olive); margin: 0 0 6px; }
+  .service p { color: var(--brown-soft); }
+
+  /* ------------------------------------------------------------
+     SELECTED WORK
+  ------------------------------------------------------------ */
+  .work-head { max-width: 40rem; margin-bottom: clamp(36px, 6vw, 56px); display: grid; gap: 16px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card {
+    display: flex; flex-direction: column; background: var(--paper);
+    border: 1px solid var(--line); padding: 28px; transition: border-color .25s, transform .25s;
+  }
+  .card:hover { border-color: var(--olive); transform: translateY(-3px); }
+  .tag {
+    align-self: flex-start; background: var(--olive-tint); color: var(--olive-deep);
+    font-size: 0.85rem; font-weight: 500; padding: 3px 10px; border-radius: 2px;
+  }
+  .card .kind { margin-top: 22px; color: var(--olive); font-weight: 500; font-size: 0.95rem; }
+  .card h3 { font-size: 1.45rem; line-height: 1.25; margin: 6px 0 14px; }
+  .card p { color: var(--brown-soft); font-size: 1rem; }
+  .lines { margin: 22px 0 24px; display: grid; gap: 9px; }
+  .lines i { display: block; height: 5px; background: var(--line); border-radius: 3px; }
+  .lines i:nth-child(1) { width: 92%; } .lines i:nth-child(2) { width: 100%; }
+  .lines i:nth-child(3) { width: 78%; } .lines i:nth-child(4) { width: 55%; }
+  .card button {
+    margin-top: auto; align-self: flex-start; background: none; border: 0; padding: 0 0 3px;
+    font: inherit; font-weight: 500; color: var(--brown); cursor: pointer;
+    border-bottom: 1px solid var(--olive); transition: color .2s;
+  }
+  .card button:hover { color: var(--olive); }
+
+  /* Reading panel */
+  dialog {
+    width: min(680px, calc(100% - 32px)); max-height: calc(100% - 48px); overflow: auto;
+    background: var(--ivory); color: var(--brown); border: 1px solid var(--line);
+    padding: clamp(24px, 5vw, 44px); margin: auto;
+  }
+  dialog::backdrop { background: rgba(52, 38, 29, .55); }
+  dialog .close {
+    float: right; background: none; border: 1px solid var(--line); color: var(--brown);
+    font: inherit; font-size: .95rem; padding: 6px 14px; border-radius: 2px; cursor: pointer; margin: 0 0 12px 12px;
+  }
+  dialog .close:hover { border-color: var(--brown); }
+  dialog h3 { font-size: clamp(1.5rem, 4vw, 2rem); line-height: 1.2; margin: 14px 0 22px; }
+  dialog h4 { font-family: var(--sans); font-weight: 600; font-size: .95rem; color: var(--olive); margin: 26px 0 6px; }
+  dialog .sample { border-left: 2px solid var(--olive); padding-left: 20px; display: grid; gap: 14px; font-family: var(--serif); font-size: 1.1rem; line-height: 1.7; }
+
+  /* ------------------------------------------------------------
+     PROCESS
+  ------------------------------------------------------------ */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: clamp(36px, 6vw, 56px); }
+  .step { border-top: 2px solid var(--olive); padding-top: 22px; }
+  .step .n { font-family: var(--serif); font-style: italic; color: var(--olive); font-size: 1.1rem; }
+  .step h3 { font-size: 1.7rem; margin: 4px 0 10px; }
+  .step p { color: var(--brown-soft); }
+
+  /* ------------------------------------------------------------
+     CONTACT
+  ------------------------------------------------------------ */
+  .contact { background: var(--olive-deep); color: var(--ivory); padding: clamp(72px, 12vw, 128px) 0; }
+  .contact h2 { font-size: clamp(2.2rem, 5.6vw, 4rem); line-height: 1.08; letter-spacing: -0.02em; max-width: 14em; }
+  .contact .intro { margin-top: 26px; max-width: 34rem; color: #E4E6D3; font-size: 1.15rem; }
+  .channels { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; }
+  .channel { border-top: 1px solid rgba(251, 248, 241, .35); padding-top: 18px; }
+  .channel .label { font-size: .95rem; color: #D5D9BE; }
+  .channel .value { display: block; margin-top: 4px; font-family: var(--serif); font-size: clamp(1.15rem, 2.4vw, 1.5rem); word-break: break-word; }
+  a.value { text-decoration: none; border-bottom: 1px solid rgba(251,248,241,.5); width: fit-content; transition: border-color .2s; }
+  a.value:hover { border-color: var(--ivory); }
+  .channel .pending { display: block; margin-top: 8px; font-size: .9rem; color: #D5D9BE; }
+  .contact .focus-fix :focus-visible, .contact :focus-visible { outline-color: var(--ivory); }
+
+  /* ------------------------------------------------------------
+     FOOTER
+  ------------------------------------------------------------ */
+  .site-footer { padding: 28px 0; font-size: .95rem; color: var(--brown-soft); }
+  .site-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .site-footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
+  .site-footer a:hover { border-color: var(--olive); }
+
+  /* ------------------------------------------------------------
+     RESPONSIVE
+  ------------------------------------------------------------ */
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 28px; }
+    .split { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media (max-width: 720px) {
+    .menu-btn { display: inline-block; }
+    .nav {
+      display: none; position: absolute; top: 66px; left: 0; right: 0;
+      flex-direction: column; gap: 0; background: var(--ivory); border-bottom: 1px solid var(--line);
+      padding: 8px var(--gutter) 16px;
+    }
+    .nav.open { display: flex; }
+    .nav a { padding: 14px 0; font-size: 1.05rem; background: none; border-bottom: 1px solid var(--line); }
+    .nav a:last-child { border-bottom: 0; }
+    .service-cols, .channels { grid-template-columns: 1fr; }
+    .btn { width: 100%; text-align: center; }
+    .actions { gap: 12px; }
+  }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" id="brandName">Eyinimofe</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <h1>
+        <span>I help brands say</span>
+        <span>what they are worth,</span>
+        <span>in words people remember.</span>
+      </h1>
+      <p class="hero-sub">
+        Brand storytelling, copywriting, and social media content for businesses that want to be understood and chosen.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#work">Explore My Work</a>
+        <a class="btn btn-ghost" href="#contact">Let's Work Together</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="wrap split">
+      <h2>About</h2>
+      <div class="about-body">
+        <p class="lede">I'm a writer who believes a brand's words should be clear first, and memorable second.</p>
+        <p class="muted">
+          I write for businesses that want to speak to their audiences with honesty and purpose. My focus is brand storytelling and copywriting, with social media content to carry the message into the places people spend their time.
+        </p>
+        <ul class="values">
+          <li><strong>Clarity.</strong> A reader should know what you offer and why it matters within moments.</li>
+          <li><strong>Story.</strong> People remember what a brand stands for far longer than what it lists.</li>
+          <li><strong>Audience.</strong> Good writing starts with who is reading and what they need to hear.</li>
+        </ul>
+        <div class="note">
+          <b>Placeholder: your story.</b> Replace this box with a few paragraphs about how you came to writing, what shapes your voice, and what you want your clients to know about you. Find it in the About section of the code.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="block" id="services">
+    <div class="wrap split">
+      <h2>Services</h2>
+      <div>
+        <article class="service">
+          <h3>Brand Storytelling</h3>
+          <div class="service-cols">
+            <div>
+              <h4>The problem</h4>
+              <p>Many businesses do good work but struggle to explain why it matters, so they end up sounding like everyone else.</p>
+            </div>
+            <div>
+              <h4>What it brings</h4>
+              <p>A clear, consistent story that shows what your brand stands for and gives your audience a reason to care.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service">
+          <h3>Copywriting</h3>
+          <div class="service-cols">
+            <div>
+              <h4>The problem</h4>
+              <p>Websites, landing pages, and emails lose readers when the message is vague, crowded, or hard to act on.</p>
+            </div>
+            <div>
+              <h4>What it brings</h4>
+              <p>Focused copy that tells people what you offer, why it matters, and what to do next.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="service">
+          <h3>Social Media Content Writing</h3>
+          <div class="service-cols">
+            <div>
+              <h4>The problem</h4>
+              <p>Posting consistently is hard, and posts without a clear voice are easy to scroll past.</p>
+            </div>
+            <div>
+              <h4>What it brings</h4>
+              <p>Captions and content that sound like your brand, suit each platform, and keep your audience engaged.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORK -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="work-head">
+        <h2>Selected work</h2>
+        <p class="muted">Three sample projects, shown here as placeholders. Each one opens a reading panel where your finished writing will sit.</p>
+      </div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="block" id="process">
+    <div class="wrap">
+      <div class="work-head" style="margin-bottom:0">
+        <h2>Working with me</h2>
+        <p class="muted">A simple process, so you always know what comes next.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="n">Step 1</span>
+          <h3>Discover</h3>
+          <p>We start by understanding your brand, your audience, and what you want the writing to achieve.</p>
+        </div>
+        <div class="step">
+          <span class="n">Step 2</span>
+          <h3>Develop</h3>
+          <p>I create the messaging and write the content, shaped around your voice and your goals.</p>
+        </div>
+        <div class="step">
+          <span class="n">Step 3</span>
+          <h3>Refine</h3>
+          <p>We review the work together, and I improve it based on your feedback until it is right.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Have a project in mind? Let's talk about it.</h2>
+      <p class="intro">Tell me about your brand, your audience, and what you need written. We'll work out together how I can help.</p>
+      <div class="channels" id="channels"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> <span id="footName">Eyinimofe</span></span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<!-- Reading panel for work samples -->
+<dialog id="viewer" aria-labelledby="vTitle">
+  <button class="close" id="vClose">Close</button>
+  <span class="tag" id="vTag"></span>
+  <h3 id="vTitle"></h3>
+  <div id="vBody"></div>
+</dialog>
+
+<script>
+  /* ------------------------------------------------------------
+     EDIT THIS BLOCK TO MAKE THE SITE YOURS
+     1. CONTACT: add your email and WhatsApp number.
+     2. WORKS: replace each placeholder with a real project, then
+        set placeholder to false to remove the "Placeholder" label.
+  ------------------------------------------------------------ */
+  const CONTACT = {
+    email: "",            // e.g. "you@example.com"
+    whatsapp: "",         // digits with country code, e.g. "2348012345678"
+  };
+
+  const WORKS = [
+    {
+      type: "Brand storytelling",
+      title: "Brand story: your project title",
+      summary: "A short description of the brand and the story you told for it.",
+      placeholder: true,
+      brief: "Describe who the brand is, who it speaks to, and what it needed from its story.",
+      approach: "Explain how you found the heart of the story and the voice you chose.",
+      sample: [
+        "Paste the opening of your brand story here.",
+        "Add a few more paragraphs, or the full piece, so a client can see how you write."
+      ]
+    },
+    {
+      type: "Landing page copywriting",
+      title: "Landing page: your project title",
+      summary: "A short description of the offer, the audience, and the page you wrote.",
+      placeholder: true,
+      brief: "Describe the product or service, and what the page needed to get visitors to do.",
+      approach: "Explain how you organized the message, from the headline to the call to action.",
+      sample: [
+        "Paste your headline and opening section here.",
+        "Add the rest of the page copy, including benefits and the closing call to action."
+      ]
+    },
+    {
+      type: "Social media content writing",
+      title: "Social content: your project title",
+      summary: "A short description of the platform, the voice, and the content you created.",
+      placeholder: true,
+      brief: "Describe the brand, the platform, and the tone the content needed to carry.",
+      approach: "Explain how you kept the voice consistent across posts.",
+      sample: [
+        "Paste a caption or a carousel script here.",
+        "Add two or three more posts so the range of your voice is visible."
+      ]
+    }
+  ];
+
+  /* ------------------------------------------------------------ */
+  const $ = (s) => document.querySelector(s);
+  const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+
+  $("#year").textContent = new Date().getFullYear();
+
+  /* Mobile menu */
+  const menuBtn = $("#menuBtn"), nav = $("#nav");
+  const setMenu = (open) => {
+    nav.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.textContent = open ? "Close" : "Menu";
+  };
+  menuBtn.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+  nav.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+
+  /* Work cards */
+  $("#cards").innerHTML = WORKS.map((w, i) => `
+    <article class="card">
+      ${w.placeholder ? '<span class="tag">Placeholder</span>' : ''}
+      <span class="kind">${esc(w.type)}</span>
+      <h3>${esc(w.title)}</h3>
+      <p>${esc(w.summary)}</p>
+      <div class="lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <button type="button" data-i="${i}">Read the sample</button>
+    </article>`).join("");
+
+  /* Reading panel */
+  const viewer = $("#viewer");
+  $("#cards").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-i]");
+    if (!btn) return;
+    const w = WORKS[btn.dataset.i];
+    $("#vTag").textContent = w.placeholder ? "Placeholder" : w.type;
+    $("#vTag").style.display = "inline-block";
+    $("#vTitle").textContent = w.title;
+    $("#vBody").innerHTML = `
+      <h4>The brief</h4><p class="muted">${esc(w.brief)}</p>
+      <h4>The approach</h4><p class="muted">${esc(w.approach)}</p>
+      <h4>The writing</h4>
+      <div class="sample">${w.sample.map((p) => `<p>${esc(p)}</p>`).join("")}</div>`;
+    viewer.showModal();
+  });
+  $("#vClose").addEventListener("click", () => viewer.close());
+  viewer.addEventListener("click", (e) => { if (e.target === viewer) viewer.close(); });
+
+  /* Contact channels: a real link once filled in, a clear placeholder until then */
+  const channels = [
+    {
+      label: "Email",
+      value: CONTACT.email,
+      placeholder: "your-email@example.com",
+      href: CONTACT.email ? "mailto:" + CONTACT.email : ""
+    },
+    {
+      label: "WhatsApp",
+      value: CONTACT.whatsapp ? "+" + CONTACT.whatsapp.replace(/\D/g, "") : "",
+      placeholder: "+234 000 000 0000",
+      href: CONTACT.whatsapp ? "https://wa.me/" + CONTACT.whatsapp.replace(/\D/g, "") : ""
+    }
+  ];
+  $("#channels").innerHTML = channels.map((c) => c.href
+    ? `<div class="channel"><span class="label">${c.label}</span><a class="value" href="${esc(c.href)}" ${c.label === "WhatsApp" ? 'target="_blank" rel="noopener"' : ""}>${esc(c.value)}</a></div>`
+    : `<div class="channel"><span class="label">${c.label}</span><span class="value">${esc(c.placeholder)}</span><span class="pending">Placeholder. Add your ${c.label.toLowerCase()} in the CONTACT settings at the top of the script.</span></div>`
+  ).join("");
+</script>
+</body>
+</html>
